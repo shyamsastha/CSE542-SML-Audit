@@ -62,16 +62,20 @@ Q2
 
 #create P(W1/X) and P(w2/X) using bayes rule P(W1/X) = P(X/W1) * P(W1)/P(X)
 #Assume equal probability; i.e., P(W1) = P(W2) = 1/2
-#Since evidence is the summation of all probabilities, P(X) = 1
+#P(X) = P(X/W1)*P(W1) + P(X/W2)*P(W2)
 
 w1_pt = (1/np.pi) * (1/(1 + np.power((X-3),2))) * 1/2
 w2_pt = (1/np.pi) * (1/(1 + np.power((X-5),2))) * 1/2
+pofx = w1_pt + w2_pt
+
+w1_x = w1_pt/pofx
+w2_x = w2_pt/pofx
 
 #plot P(W1/X) and P(W2/X)
 fig = plt.figure()
 ax = fig.add_axes([0,0,1,1])
-ax.plot(X, w1_pt, label='P(w1/X)')
-ax.plot(X, w2_pt, label='P(w2/X)')
+ax.plot(X, w1_x, label='P(w1/X)')
+ax.plot(X, w2_x, label='P(w2/X)')
 ax.legend(loc='upper left')
 plt.xlabel('X')
 plt.show()
